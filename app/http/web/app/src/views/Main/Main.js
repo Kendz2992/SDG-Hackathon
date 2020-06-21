@@ -17,16 +17,47 @@ import "../../App.css";
 import * as mockData from "../../data/skateboard-parks.json";
 
 export default function Main() {
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     fetch("/testg")
-  //       .then((res) => res.text()) // convert to plain text
-  //       .then((text) => console.log(text));
-  //   }, 2000);
-  //   return () => clearInterval(interval);
-  // }, []);
   const [activeEvent, setActiveEvent] = useState(null);
-  const [eventData, setEventData] = useState(mockData.default);
+  const [eventData, setEventData] = useState(null);
+  useEffect(() => {
+    fetch("/events")
+      .then((res) => res.text()) // convert to plain text
+      .then((text) => {
+        // console.log(mockData.default);
+        let GeoJSON = {
+          type: "FeatureCollection",
+          crs: {
+            type: "name",
+            properties: {
+              name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+            },
+          },
+          features: mockData.default.features.map((feature) => {
+            let hours = new Date().getHours();
+            let minutes = "0" + new Date().getMinutes();
+            let time = hours + ":" + minutes.substr(-2);
+            feature = {
+              ...feature,
+              properties: {
+                ...feature.properties,
+                TIME: time,
+              },
+            };
+            return feature;
+          }),
+        };
+        setEventData(GeoJSON);
+      });
+    //   const interval = setInterval(() => {
+    //     fetch("/events/latest")
+    //       .then((res) => res.text()) // convert to plain text
+    //       .then((text) => {
+    //         console.log(text);
+    //       });
+    //   }, 2000);
+    //   return () => clearInterval(interval);
+    // }, []);
+  }, []);
 
   let activeEventIconName = "";
   let popupTitle = "";
@@ -62,7 +93,7 @@ export default function Main() {
                 <CardTitle tag="h2">
                   Sensor Events (
                   {
-                    eventData.features.filter((event) => event.properties.TYPE)
+                    eventData?.features.filter((event) => event.properties.TYPE)
                       .length
                   }
                   )
@@ -71,7 +102,7 @@ export default function Main() {
                   <Button>
                     Fire (
                     {
-                      eventData.features.filter(
+                      eventData?.features.filter(
                         (event) => event.properties.TYPE === "fire"
                       ).length
                     }
@@ -79,7 +110,7 @@ export default function Main() {
                   </Button>
                   <Button
                     onClick={() => {
-                      let filteredData = eventData.features.filter(
+                      let filteredData = eventData?.features.filter(
                         (event) => event.properties.TYPE === "electric"
                       );
                       setEventData({ ...eventData, features: filteredData });
@@ -87,7 +118,7 @@ export default function Main() {
                   >
                     Power Outage (
                     {
-                      eventData.features.filter(
+                      eventData?.features.filter(
                         (event) => event.properties.TYPE === "electric"
                       ).length
                     }
@@ -97,7 +128,7 @@ export default function Main() {
               </CardHeader>
               <CardBody>
                 <ul className="events-list">
-                  {eventData.features
+                  {eventData?.features
                     .filter((event) => event.properties.TYPE)
                     .map((event) => {
                       let iconName = "";

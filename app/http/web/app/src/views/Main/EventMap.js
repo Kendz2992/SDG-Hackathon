@@ -28,7 +28,7 @@ export default function EventMap({
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {eventData.features.map((event) => {
+      {eventData?.features.map((event) => {
         let iconName = "";
         switch (event.properties.TYPE) {
           case "fire":
@@ -93,6 +93,12 @@ export default function EventMap({
               </CardTitle>
             </CardHeader>
             <CardBody>
+              <Row style={{ display: "flex", alignItems: "flex-end" }}>
+                <span className="material-icons">explore</span>
+                <CardText className="m-b-0 p-l-5 f-s-14">
+                  {activeEvent.properties.NAME}
+                </CardText>
+              </Row>
               <Row style={{ display: "flex", alignItems: "flex-end" }}>
                 <span className="material-icons">location_on</span>
                 <CardText className="m-b-0 p-l-5 f-s-14">
