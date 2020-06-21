@@ -38,9 +38,15 @@
 }
 
 .leaflet-container {
-  width: 100%;
+  width: 75%;
   height: 100vh;
   position: absolute;
+}
+
+.event-icon {
+  margin-top: 2px;
+  /* margin-left: 3px; */
+  font-size: 22px;
 }
 
 .fire-pin {
@@ -53,29 +59,33 @@
   background: linear-gradient(45deg, #c70000 0%, #f79595 100%);
 }
 
-.event-icon {
-  margin-top: 2px;
-  margin-left: 3px;
-  font-size: 22px;
-}
-
 .fire-event {
   color: rgb(226, 226, 9);
 }
 
-.event-popup-card-header {
-  display: flex;
-  align-content: center;
-  min-width: 200px;
+.electric-pin {
+  margin-top: 3px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  margin-left: -10px;
+  border: 8px solid linear-gradient(45deg, #007991 0%, #78ffd6 100%);
+  background: linear-gradient(45deg, #c7a900 0%, #f7d895 100%);
+}
+
+.electric-event {
+  color: black;
 }
 
 .event-icon-wrapper {
   margin-right: 10px;
+  display: inline-flex !important;
 }
 
 .m-b-0 {
   margin-bottom: 0px !important;
 }
+
 .p-l-5 {
   padding-left: 5px !important;
 }
@@ -87,8 +97,8 @@
 .popup-close,
 .popup-close:hover {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 8px;
+  right: 8px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -96,6 +106,42 @@
   float: right;
 }
 
+.f-s-14 {
+  font-size: 14px !important;
+}
+
 .f-s-18 {
   font-size: 18px !important;
+}
+
+.events-list-container {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100vh;
+  width: 25%;
+  z-index: 1000;
+  background: rgb(241, 243, 244);
+  cursor: default;
+  overflow: scroll;
+}
+
+/* .events-list-card {
+  padding: px 0px;
+} */
+
+.events-list {
+  list-style: none;
+  text-align: initial;
+  padding-left: 0px;
+}
+
+.events-list-item {
+  margin-bottom: 8px;
+  padding-left: 25px;
+  padding-bottom: 4px;
+}
+
+.events-list-item:hover {
+  background-color: white;
 }
