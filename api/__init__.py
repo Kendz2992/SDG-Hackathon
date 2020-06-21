@@ -1,8 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
 
-from config import Config
+from .config import Config
 
 db = SQLAlchemy()
 
@@ -11,13 +10,12 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    import models
+    from .models import Events, Sensors
 
     db.init_app(app)
-    # db.create_all()
 
-    from endpoints import event
-    from test_endpoints import test
+    from .endpoints import event
+    from .test_endpoints import test
 
     app.register_blueprint(event)
     app.register_blueprint(test)
@@ -25,8 +23,12 @@ def create_app():
     return app
 
 
-if __name__ == "__main__":
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get("PORT", 5000))
-    app = create_app()
-    app.run(host="0.0.0.0", port=port)
+def setup_db(db):
+
+    # Setup db with base sensors and events
+    from .config_db import START_EVENTS, START_SENSORS
+
+    db.session.add_all(START_SENSORS)
+    db.session.commit()
+    db.session.add_all(START_EVENTS)
+    db.session.commit()

@@ -1,7 +1,8 @@
 from datetime import datetime
 from flask import Blueprint, jsonify, request
 
-from __init__ import db
+from . import db
+from .models import Events, Sensors
 
 test = Blueprint("test", __name__)
 
@@ -11,7 +12,9 @@ test = Blueprint("test", __name__)
 @test.route("/index", methods=["GET"])
 def home():
     time = datetime.now()
-    return f"Welcome to SDG Hackathon @ {time}"
+    sensors = Sensors.query.count()
+    events = Events.query.count()
+    return f"Welcome to SDG Hackathon @ {time}, there are {sensors} sensors and {events} events registered"
 
 
 @test.route("/testg", methods=["GET"])

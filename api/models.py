@@ -1,17 +1,25 @@
+from dataclasses import dataclass
 from datetime import datetime
 
-from __init__ import db
+from . import db
 
 
-class Sensor(db.Model):
+class Sensors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     location = db.Column(db.String(250), nullable=False)
     model = db.Column(db.String(250))
     radius = db.Column(db.Integer)
 
+    def __repr__(self):
+        return f"<Sensor {self.id}-{self.location}>"
 
-class Event(db.Model):
+
+@dataclass
+class Events(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     location = db.Column(db.String(250), nullable=False)
     event_type = db.Column(db.String(250), nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    sensor_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"<Event {self.id}-{self.event_type}-{self.location}>"
