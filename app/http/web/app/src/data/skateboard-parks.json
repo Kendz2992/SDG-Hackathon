@@ -30,7 +30,8 @@
         "DESCRIPT_1": "Surface d'asphalte plane, 5 modules",
         "PICTURE_LI": null,
         "PICTURE_DE": null,
-        "PICTURE__1": null
+        "PICTURE__1": null,
+        "TYPE": "fire"
       },
       "geometry": {
         "type": "Point",
@@ -60,7 +61,8 @@
         "DESCRIPT_1": "Surface d'asphalte plane, 10 modules, programmes et camps de planche à roulettes en été géré par la Ville",
         "PICTURE_LI": null,
         "PICTURE_DE": null,
-        "PICTURE__1": null
+        "PICTURE__1": null,
+        "TYPE": "electric"
       },
       "geometry": {
         "type": "Point",
@@ -90,7 +92,8 @@
         "DESCRIPT_1": "Bol de béton, 7 000 pi2",
         "PICTURE_LI": null,
         "PICTURE_DE": null,
-        "PICTURE__1": null
+        "PICTURE__1": null,
+        "TYPE": "electric"
       },
       "geometry": {
         "type": "Point",
@@ -120,7 +123,8 @@
         "DESCRIPT_1": "Surface plane, 5 modules",
         "PICTURE_LI": null,
         "PICTURE_DE": null,
-        "PICTURE__1": null
+        "PICTURE__1": null,
+        "TYPE": "fire"
       },
       "geometry": {
         "type": "Point",
@@ -150,7 +154,8 @@
         "DESCRIPT_1": "Surface plane, 5 modules",
         "PICTURE_LI": null,
         "PICTURE_DE": null,
-        "PICTURE__1": null
+        "PICTURE__1": null,
+        "TYPE": "fire"
       },
       "geometry": {
         "type": "Point",
@@ -180,7 +185,8 @@
         "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
         "PICTURE_LI": null,
         "PICTURE_DE": null,
-        "PICTURE__1": null
+        "PICTURE__1": null,
+        "TYPE": "electric"
       },
       "geometry": {
         "type": "Point",

@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import EventMap from "./EventMap";
 import "../../App.css";
 import { Container, Row, Col } from "reactstrap";
+import * as eventData from "../../data/skateboard-parks.json";
 
 export default function Main() {
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("This will run every second!");
-    }, 10000);
+      fetch("/testg")
+        .then((res) => res.text()) // convert to plain text
+        .then((text) => console.log(text));
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="App">
-      <Container>
-        <Row>
-          <Col sm={9}>
-            <div
-              style={{ position: "relative", height: "100vh", width: "100%" }}
-            >
-              <EventMap />
-            </div>
-          </Col>
-          <Col sm={3}>
-            <div
-              style={{ height: 100, width: 100, background: "dodgerblue" }}
-            />
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container>
+      <EventMap eventData={eventData.default} />
+    </Container>
   );
 }
