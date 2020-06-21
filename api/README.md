@@ -1,0 +1,14 @@
+To run this local out of the repo
+- cd to top folder of repo
+- Install pipenv via `brew install pipenv` or similar commands
+- `pipenv shell`
+- `export FLASK_APP=api`
+- `export FLASK_DEBUG=True`
+- Open up a python idle with `python`
+- `from api.models import Events, Sensors`
+- `from api import db, create_app, setup_db`
+- `db.create_all(app=create_app())`
+- Exit python idle with `exit()`
+- Back in env shell, use `flask run`
+- This should start a local version of the project
+- Use Postman to add/POST new sensors and events
