@@ -7,14 +7,14 @@ To run this local out of the repo
 - `pipenv shell`
 - `export FLASK_APP=api`
 - `export FLASK_DEBUG=True`
-- Open up a python ZZZ with `python`
+- Open up a python idle with `python`
 - `from api.models import Events, Sensors`
 - `from api import db, create_app, setup_db`
 - `db.create_all(app=create_app())`
-- `setup_db(db)`
-- Exit python ZZZ with `exit()`
+- Exit python idle with `exit()`
 - Back in env shell, use `flask run`
 - This should start a local version of the project
+- Use Postman to add/POST new sensors and events
 
 Some resources we used to create this project
 - https://developer.okta.com/blog/2018/12/20/crud-app-with-python-flask-react
