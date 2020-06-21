@@ -30,7 +30,7 @@ def get_events():
 def get_recent_events():
     time = datetime.now()
 
-    event_query = Events.query[-5:]
+    # event_query = Events.query[-5:]
     event_query = Events.query.filter(
         Events.created > (datetime.now() - timedelta(minutes=2))
     ).all()

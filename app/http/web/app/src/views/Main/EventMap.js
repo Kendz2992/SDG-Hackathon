@@ -28,9 +28,9 @@ export default function EventMap({
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {eventData?.features.map((event) => {
+      {eventData?.events.map((event, index) => {
         let iconName = "";
-        switch (event.properties.TYPE) {
+        switch (event.type) {
           case "fire":
             iconName = "whatshot";
             break;
@@ -42,7 +42,7 @@ export default function EventMap({
             break;
         }
         let IconComponent = (
-          <EventIcon iconName={iconName} eventType={event.properties.TYPE} />
+          <EventIcon iconName={iconName} eventType={event.type} />
         );
         const icon = L.divIcon({
           className: "custom-icon",
@@ -50,10 +50,10 @@ export default function EventMap({
         });
         return (
           <Marker
-            key={event.properties.PARK_ID}
+            key={index}
             position={[
-              event.geometry.coordinates[1],
-              event.geometry.coordinates[0],
+              event.location.geometry.coordinates[0],
+              event.location.geometry.coordinates[1],
             ]}
             onClick={() => {
               setActiveEvent(event);
@@ -66,8 +66,8 @@ export default function EventMap({
       {activeEvent && (
         <Popup
           position={[
-            activeEvent.geometry.coordinates[1],
-            activeEvent.geometry.coordinates[0],
+            activeEvent.location.geometry.coordinates[0],
+            activeEvent.location.geometry.coordinates[1],
           ]}
           onClose={() => {
             setActiveEvent(null);
@@ -79,7 +79,7 @@ export default function EventMap({
                 <span className="event-icon-wrapper" style={{ marginLeft: 10 }}>
                   <EventIcon
                     iconName={activeEventIconName}
-                    eventType={activeEvent.properties.TYPE}
+                    eventType={activeEvent.type}
                     style={{ marginTop: 4, marginLeft: 5, fontSize: 18 }}
                   />
                 </span>
@@ -96,19 +96,19 @@ export default function EventMap({
               <Row style={{ display: "flex", alignItems: "flex-end" }}>
                 <span className="material-icons">explore</span>
                 <CardText className="m-b-0 p-l-5 f-s-14">
-                  {activeEvent.properties.NAME}
+                  {activeEvent.location.properties.name}
                 </CardText>
               </Row>
               <Row style={{ display: "flex", alignItems: "flex-end" }}>
                 <span className="material-icons">location_on</span>
                 <CardText className="m-b-0 p-l-5 f-s-14">
-                  {activeEvent.properties.ADDRESS}
+                  {activeEvent.location.properties.address}
                 </CardText>
               </Row>
               <Row style={{ display: "flex", alignItems: "flex-end" }}>
                 <span className="material-icons">schedule</span>
                 <CardText className="m-b-0 p-l-5 f-s-14">
-                  {activeEvent.properties.TIME || "4:21pm"}
+                  {activeEvent.created}
                 </CardText>
               </Row>
             </CardBody>

@@ -20,48 +20,73 @@ export default function Main() {
   const [activeEvent, setActiveEvent] = useState(null);
   const [eventData, setEventData] = useState(null);
   useEffect(() => {
-    fetch("/sensors")
-      .then((res) => res.text()) // convert to plain text
-      .then((text) => {
-        console.log(text);
-        let GeoJSON = {
-          type: "FeatureCollection",
-          crs: {
-            type: "name",
-            properties: {
-              name: "urn:ogc:def:crs:OGC:1.3:CRS84",
-            },
-          },
-          features: mockData.default.features.map((feature) => {
-            let hours = new Date().getHours();
-            let minutes = "0" + new Date().getMinutes();
-            let time = hours + ":" + minutes.substr(-2);
-            feature = {
-              ...feature,
+    // fetch("/events")
+    //   .then((res) => res.text()) // convert to plain text
+    //   .then((text) => {
+    //     const jlog = JSON.parse(text);
+    //     // console.log(mockData);
+    //     let GeoJSON = {
+    //       type: "FeatureCollection",
+    //       crs: {
+    //         type: "name",
+    //         properties: {
+    //           name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+    //         },
+    //       },
+    //       features: mockData.default.features.map((feature) => {
+    //         let hours = new Date().getHours();
+    //         let minutes = "0" + new Date().getMinutes();
+    //         let time = hours + ":" + minutes.substr(-2);
+    //         feature = {
+    //           ...feature,
+    //           properties: {
+    //             ...feature.properties,
+    //             TIME: time,
+    //           },
+    //         };
+    //         return feature;
+    //       }),
+    //     };
+    //     setEventData(jlog);
+    //   });
+    const interval = setInterval(() => {
+      fetch("/events/latest")
+        .then((res) => res.text()) // convert to plain text
+        .then((text) => {
+          const jlog = JSON.parse(text);
+          // console.log(mockData);
+          let GeoJSON = {
+            type: "FeatureCollection",
+            crs: {
+              type: "name",
               properties: {
-                ...feature.properties,
-                TIME: time,
+                name: "urn:ogc:def:crs:OGC:1.3:CRS84",
               },
-            };
-            return feature;
-          }),
-        };
-        setEventData(GeoJSON);
-      });
-    //   const interval = setInterval(() => {
-    //     fetch("/events/latest")
-    //       .then((res) => res.text()) // convert to plain text
-    //       .then((text) => {
-    //         console.log(text);
-    //       });
-    //   }, 2000);
-    //   return () => clearInterval(interval);
-    // }, []);
+            },
+            features: mockData.default.features.map((feature) => {
+              let hours = new Date().getHours();
+              let minutes = "0" + new Date().getMinutes();
+              let time = hours + ":" + minutes.substr(-2);
+              feature = {
+                ...feature,
+                properties: {
+                  ...feature.properties,
+                  TIME: time,
+                },
+              };
+              return feature;
+            }),
+          };
+          setEventData(jlog);
+        });
+    }, 2000);
+    return () => clearInterval(interval);
   }, []);
+  // []);
 
   let activeEventIconName = "";
   let popupTitle = "";
-  switch (activeEvent?.properties.TYPE) {
+  switch (activeEvent?.type) {
     case "fire":
       activeEventIconName = "whatshot";
       popupTitle = "Fire";
@@ -93,7 +118,7 @@ export default function Main() {
                 <CardTitle tag="h2">
                   Sensor Events (
                   {
-                    eventData?.features.filter((event) => event.properties.TYPE)
+                    eventData?.events.filter((event) => event.type)
                       .length
                   }
                   )
@@ -128,11 +153,10 @@ export default function Main() {
               </CardHeader>
               <CardBody>
                 <ul className="events-list">
-                  {eventData?.features
-                    .filter((event) => event.properties.TYPE)
+                  {eventData?.events.filter((event) => event.type)
                     .map((event) => {
                       let iconName = "";
-                      switch (event.properties.TYPE) {
+                      switch (event.type) {
                         case "fire":
                           iconName = "whatshot";
                           break;
@@ -145,7 +169,7 @@ export default function Main() {
                       }
                       return (
                         <li
-                          key={event.properties.ADDRESS}
+                          key={event.location.properties.address}
                           className="events-list-item"
                           onClick={() => {
                             setActiveEvent(event);
@@ -157,11 +181,11 @@ export default function Main() {
                           >
                             <EventIcon
                               iconName={iconName}
-                              eventType={event.properties.TYPE}
+                              eventType={event.type}
                               style={{ marginLeft: 3 }}
                             />
                           </span>
-                          {event.properties.ADDRESS}
+                          {event.location.properties.address}
                         </li>
                       );
                     })}
