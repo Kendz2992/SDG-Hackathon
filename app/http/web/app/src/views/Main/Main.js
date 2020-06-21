@@ -20,10 +20,10 @@ export default function Main() {
   const [activeEvent, setActiveEvent] = useState(null);
   const [eventData, setEventData] = useState(null);
   useEffect(() => {
-    fetch("/events")
+    fetch("/sensors")
       .then((res) => res.text()) // convert to plain text
       .then((text) => {
-        // console.log(mockData.default);
+        console.log(text);
         let GeoJSON = {
           type: "FeatureCollection",
           crs: {
@@ -98,7 +98,7 @@ export default function Main() {
                   }
                   )
                 </CardTitle>
-                <ButtonGroup>
+                {/* <ButtonGroup>
                   <Button>
                     Fire (
                     {
@@ -124,7 +124,7 @@ export default function Main() {
                     }
                     )
                   </Button>
-                </ButtonGroup>
+                </ButtonGroup> */}
               </CardHeader>
               <CardBody>
                 <ul className="events-list">
