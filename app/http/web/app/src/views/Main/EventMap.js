@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
-import EventIcon from "../../components/EventIcon";
 import {
   Button,
   Card,
@@ -13,37 +12,23 @@ import {
   Row,
 } from "reactstrap";
 
-export default function EventMap({ eventData }) {
-  const [activeEvent, setActiveEvent] = useState(null);
+import EventIcon from "../../components/EventIcon";
 
-  console.log(eventData);
-
-  let activeEventIconName = "";
-  let popupTitle = "";
-  switch (activeEvent?.properties.TYPE) {
-    case "fire":
-      activeEventIconName = "whatshot";
-      popupTitle = "Fire";
-      break;
-    case "electric":
-      activeEventIconName = "power_off";
-      popupTitle = "Power outage";
-      break;
-
-    default:
-      break;
-  }
-
-  // St Pete coordinates are [27.7676, -82.6403]
+export default function EventMap({
+  eventData,
+  setActiveEvent,
+  activeEvent,
+  activeEventIconName,
+  popupTitle,
+}) {
   return (
-    <Map center={[45.4, -75.7]} zoom={12}>
+    <Map center={[27.7676, -82.6403]} zoom={12}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
       {eventData.features.map((event) => {
-        console.log(event);
         let iconName = "";
         switch (event.properties.TYPE) {
           case "fire":
@@ -124,26 +109,6 @@ export default function EventMap({ eventData }) {
           </Card>
         </Popup>
       )}
-
-      <div className="events-list-container">
-        <Card>
-          <CardHeader>Events ({eventData.features.length})</CardHeader>
-          <CardBody>
-            <ul>
-              {eventData.features.map((event) => (
-                <li
-                  key={event.properties.ADDRESS}
-                  onClick={() => {
-                    setActiveEvent(event);
-                  }}
-                >
-                  {event.properties.ADDRESS}
-                </li>
-              ))}
-            </ul>
-          </CardBody>
-        </Card>
-      </div>
     </Map>
   );
 }

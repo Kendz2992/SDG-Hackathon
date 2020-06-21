@@ -38,7 +38,7 @@
 }
 
 .leaflet-container {
-  width: 100%;
+  width: 75%;
   height: 100vh;
   position: absolute;
 }
@@ -119,12 +119,28 @@
   top: 0px;
   right: 0px;
   height: 100vh;
-  width: 300px;
+  width: 25%;
   z-index: 1000;
   background: rgb(241, 243, 244);
   cursor: default;
+  overflow: scroll;
 }
 
-/* .events-list-container {
-  cursor: pointer;
-} */
+.events-list-card {
+  /* padding: px 0px; */
+}
+
+.events-list {
+  list-style: none;
+  text-align: initial;
+  padding-left: 0px;
+}
+
+.events-list-item {
+  margin-bottom: 8px;
+  padding-left: 25px;
+}
+
+.events-list-item:hover {
+  background-color: white;
+}
