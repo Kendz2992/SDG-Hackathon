@@ -6,7 +6,7 @@ from . import db
 
 class Sensors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(250), nullable=False)
+    location = db.Column(db.JSON, nullable=False)
     model = db.Column(db.String(250))
     radius = db.Column(db.Integer)
 
@@ -17,9 +17,10 @@ class Sensors(db.Model):
 @dataclass
 class Events(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(250), nullable=False)
+    location = db.Column(db.JSON, nullable=False)
     event_type = db.Column(db.String(250), nullable=False)
     sensor_id = db.Column(db.Integer)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     def __repr__(self):
         return f"<Event {self.id}-{self.event_type}-{self.location}>"
