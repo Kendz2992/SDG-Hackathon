@@ -6,7 +6,7 @@ To run this local out of the repo
 - `export FLASK_DEBUG=True`
 - Open up a python idle with `python`
 - `from api.models import Events, Sensors`
-- `from api import db, create_app, setup_db`
+- `from api import db, create_app`
 - `db.create_all(app=create_app())`
 - Exit python idle with `exit()`
 - Back in env shell, use `flask run`
