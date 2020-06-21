@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import Blueprint, jsonify, request
 
 from . import db
@@ -19,6 +19,7 @@ def get_events():
                 "location": event.location,
                 "type": event.event_type,
                 "sensor_id": event.sensor_id,
+                "created": event.created,
             }
         )
 
@@ -29,7 +30,10 @@ def get_events():
 def get_recent_events():
     time = datetime.now()
 
-    event_query = Events.query.all()
+    event_query = Events.query[-5:]
+    event_query = Events.query.filter(
+        Events.created > (datetime.now() - timedelta(minutes=1))
+    ).all()
     events = []
 
     for event in event_query:
@@ -39,6 +43,7 @@ def get_recent_events():
                 "location": event.location,
                 "type": event.event_type,
                 "sensor_id": event.sensor_id,
+                "created": f"{time - event.created} ago",
             }
         )
 
@@ -48,6 +53,9 @@ def get_recent_events():
 @event.route("/events", methods=["POST"])
 def post_events():
     event = request.get_json()
+
+    if "sensor_id" in event:
+        event["location"] = Sensors.query.get(event["sensor_id"]).location
     new_event = Events(**event)
 
     db.session.add(new_event)
