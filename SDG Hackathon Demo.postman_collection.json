@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "c02aa2b7-7e3e-48f5-af59-fe928cf94a40",
+		"name": "SDG Hackathon Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/sensors",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": {\n        \"type\": 1,\n        \"properties\": {\n        \t\"name\": \"Saint Petersburg City Hall\", \n        \t\"address\": \"175 5th St N, St. Petersburg, FL 33701\"\n        },\n        \"geometry\": {\n        \t\"type\": \"Point\", \n        \t\"coordinates\": [27.773056, -82.64]\n        }\n    }, \n    \"model\": \"a\", \n    \"radius\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/sensors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"sensors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/sensors",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": {\n        \"type\": 2,\n        \"properties\": {\n            \"name\": \"Leslee Lake\",\n            \"address\": \"Leslee Lake Dr N, St. Petersburg, FL 33713\"\n        },\n        \"geometry\": {\n            \"type\": \"Point\", \n            \"coordinates\": [27.7963597, -82.6933985]\n        }\n    }, \n    \"model\": \"b\", \n    \"radius\": 6\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/sensors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"sensors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/sensors",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"location\": {\n        \"type\": 3,\n        \"properties\": {\n            \"name\": \"Douglas L. Jamerson Elementary School\",\n            \"address\": \"1200 37th St S, St. Petersburg, FL 33711\"\n        },\n        \"geometry\": {\n            \"type\": \"Point\", \n            \"coordinates\": [27.758062, -82.682204]\n        }\n    },\n    \"model\": \"c\",\n    \"radius\": 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/sensors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"sensors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/events",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_type\": \"fire\", \"sensor_id\": 2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/events",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_type\": \"fire\", \"sensor_id\": 2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
