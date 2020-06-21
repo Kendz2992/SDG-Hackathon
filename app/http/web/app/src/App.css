@@ -1,0 +1,101 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+
+.fire-pin {
+  margin-top: 3px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  margin-left: -10px;
+  border: 8px solid linear-gradient(45deg, #007991 0%, #78ffd6 100%);
+  background: linear-gradient(45deg, #c70000 0%, #f79595 100%);
+}
+
+.event-icon {
+  margin-top: 2px;
+  margin-left: 3px;
+  font-size: 22px;
+}
+
+.fire-event {
+  color: rgb(226, 226, 9);
+}
+
+.event-popup-card-header {
+  display: flex;
+  align-content: center;
+  min-width: 200px;
+}
+
+.event-icon-wrapper {
+  margin-right: 10px;
+}
+
+.m-b-0 {
+  margin-bottom: 0px !important;
+}
+.p-l-5 {
+  padding-left: 5px !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  display: none;
+}
+
+.popup-close,
+.popup-close:hover {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+  float: right;
+}
+
+.f-s-18 {
+  font-size: 18px !important;
+}
